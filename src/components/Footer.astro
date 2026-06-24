@@ -1,0 +1,72 @@
+---
+import { MapPin } from "lucide-react";
+---
+
+<footer class="bg-[#0B2545] text-white mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="lg:col-span-1">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-[#E8472A] rounded-lg flex items-center justify-center">
+            <MapPin class="w-4 h-4 text-white" />
+          </div>
+          <span class="font-[family-name:var(--font-sora)] font-bold text-lg">
+            ANZ<span class="text-[#E8472A]">Postcode</span>
+          </span>
+        </a>
+        <p class="text-white/60 text-sm leading-relaxed">
+          Australia & New Zealand postcode directory. Find postcodes, suburbs, and localities across both countries.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">🇦🇺 Australia</h3>
+        <ul class="space-y-2">
+          <li><a href="/au" class="text-white/60 hover:text-white text-sm transition-colors">Overview</a></li>
+          <li><a href="/au/postcodes" class="text-white/60 hover:text-white text-sm transition-colors">All Postcodes</a></li>
+          <li><a href="/au/suburbs" class="text-white/60 hover:text-white text-sm transition-colors">All Suburbs</a></li>
+          <li><a href="/au/a-z" class="text-white/60 hover:text-white text-sm transition-colors">A–Z Index</a></li>
+          <li><a href="/au/state/nsw" class="text-white/60 hover:text-white text-sm transition-colors">New South Wales</a></li>
+          <li><a href="/au/state/vic" class="text-white/60 hover:text-white text-sm transition-colors">Victoria</a></li>
+          <li><a href="/au/state/qld" class="text-white/60 hover:text-white text-sm transition-colors">Queensland</a></li>
+          <li><a href="/au/state/wa" class="text-white/60 hover:text-white text-sm transition-colors">Western Australia</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">🇳🇿 New Zealand</h3>
+        <ul class="space-y-2">
+          <li><a href="/nz" class="text-white/60 hover:text-white text-sm transition-colors">Overview</a></li>
+          <li><a href="/nz/postcodes" class="text-white/60 hover:text-white text-sm transition-colors">All Postcodes</a></li>
+          <li><a href="/nz/localities" class="text-white/60 hover:text-white text-sm transition-colors">All Localities</a></li>
+          <li><a href="/nz/a-z" class="text-white/60 hover:text-white text-sm transition-colors">A–Z Index</a></li>
+          <li><a href="/nz/region/auckland" class="text-white/60 hover:text-white text-sm transition-colors">Auckland</a></li>
+          <li><a href="/nz/region/wellington" class="text-white/60 hover:text-white text-sm transition-colors">Wellington</a></li>
+          <li><a href="/nz/region/canterbury" class="text-white/60 hover:text-white text-sm transition-colors">Canterbury</a></li>
+          <li><a href="/nz/region/waikato" class="text-white/60 hover:text-white text-sm transition-colors">Waikato</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Information</h3>
+        <ul class="space-y-2">
+          <li><a href="/about" class="text-white/60 hover:text-white text-sm transition-colors">About Us</a></li>
+          <li><a href="/data-sources" class="text-white/60 hover:text-white text-sm transition-colors">Data Sources</a></li>
+          <li><a href="/contact" class="text-white/60 hover:text-white text-sm transition-colors">Contact</a></li>
+          <li><a href="/privacy-policy" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Use</a></li>
+          <li><a href="/disclaimer" class="text-white/60 hover:text-white text-sm transition-colors">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 mt-10 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <p class="text-white/40 text-sm">© {new Date().getFullYear()} ANZPostcode.com. All rights reserved.</p>
+        <p class="text-white/40 text-xs max-w-md">
+          Postcode information is provided for general reference only. For official delivery or address verification, please check Australia Post or NZ Post.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<BaseLayout title="About Us" description="Learn about ANZPostcode.com — a free Australia and New Zealand postcode directory." canonical="https://anzpostcode.com/about">
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "About Us" }]} />
+  <main>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="font-[family-name:var(--font-sora)] text-3xl sm:text-4xl font-bold text-[#0B2545] mb-6">About ANZPostcode</h1>
+      <div class="prose max-w-none text-[#1A1A2E] space-y-4">
+        <p>ANZPostcode.com is a free, comprehensive online directory for Australian and New Zealand postcodes, suburbs, and localities. Our goal is to make finding postcode information simple, fast, and accessible for everyone.</p>
+        <p>Whether you're looking up a postcode for shipping, planning a move, researching locations, or just curious about an area — we've got you covered with detailed information including maps, nearby areas, and related postcodes.</p>
+        <h2 class="font-[family-name:var(--font-sora)] text-xl font-bold text-[#0B2545] mt-8 mb-3">What We Offer</h2>
+        <ul class="list-disc pl-6 space-y-2 text-[#6B7280]">
+          <li>Searchable database of Australian and New Zealand postcodes</li>
+          <li>Detailed postcode information including suburbs, states, and coordinates</li>
+          <li>Interactive maps powered by OpenStreetMap</li>
+          <li>Nearby postcodes and suburb discovery</li>
+          <li>Browse by state, region, or alphabetical index</li>
+          <li>Completely free to use — no registration required</li>
+        </ul>
+        <h2 class="font-[family-name:var(--font-sora)] text-xl font-bold text-[#0B2545] mt-8 mb-3">Data Sources</h2>
+        <p>Our data is compiled from publicly available sources and community contributions. We update our dataset regularly to maintain accuracy. For more details, visit our <a href="/data-sources" class="text-[#E8472A] hover:underline">Data Sources</a> page.</p>
+        <div class="bg-[#F4F6F9] border border-[#E2E6ED] rounded-xl p-4 text-sm text-[#6B7280] mt-8">
+          <p class="font-medium text-[#1A1A2E] mb-1">⚠️ Not an Official Source</p>
+          <p>ANZPostcode.com is not affiliated with Australia Post, NZ Post, or any government agency. For official postal information, please contact the relevant postal authority directly.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

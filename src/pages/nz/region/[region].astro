@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import SearchBox from "../../../components/SearchBox";
+import { getNZRegionGroups, getNZPostcodeGroups } from "../../../lib/data";
+import { titleCase } from "../../../lib/utils";
+
+export async function getStaticPaths() {
+  const groups = getNZRegionGroups();
+  return groups.map((r) => ({
+    params: { region: r.slug },
+  }));
+}
+
+const { region } = Astro.params;
+const groups = getNZRegionGroups();
+const rg = groups.find((r) => r.slug === region);
+if (!rg) return Astro.redirect("/404");
+
+const nzMap = getNZPostcodeGroups();
+const regionPostcodes = rg.postcodes.map((p) => nzMap.get(p)).filter(Boolean);
+const faqs = [
+  { question: `What postcodes are in ${rg.state}?`, answer: `${rg.state} has ${rg.postcodes.length} postcodes covering ${rg.localityCount} localities.` },
+  { question: `What are the main localities in ${rg.state}?`, answer: `${rg.state} includes towns and localities across ${rg.postcodes.length} postcode areas.` },
+  { question: `How many postcodes does ${rg.state} have?`, answer: `${rg.state} has ${rg.postcodes.length} postcodes.` },
+  { question: "Is this postcode information official?", answer: "This information is provided for general reference only. For official postal purposes, please check NZ Post." },
+];
+---
+
+<BaseLayout
+  title={`${rg.state} Postcodes – New Zealand`}
+  description={`Browse all ${rg.postcodes.length} postcodes in ${rg.state}, New Zealand. Find localities, maps, and nearby postcodes.`}
+  canonical={`https://anzpostcode.com/nz/region/${region}`}
+>
+  <Header slot="header" />
+  <Breadcrumbs items={[
+    { label: "New Zealand", href: "/nz" },
+    { label: rg.state },
+  ]} />
+  <main>
+    <section class="bg-gradient-to-br from-[#1B4332] to-[#2D6A4F] text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-[family-name:var(--font-sora)] text-4xl sm:text-5xl font-bold mb-3">{rg.state} Postcodes</h1>
+        <p class="text-white/70 text-lg">{rg.postcodes.length} postcodes · {rg.localityCount} localities</p>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="mb-6 max-w-md">
+        <SearchBox client:load size="sm" placeholder={`Search ${rg.state} postcodes…`} />
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {rg.postcodes.map((postcode) => (
+          <a key={postcode} href={`/nz/postcode/${postcode}`}
+            class="bg-white rounded-xl border border-[#E2E6ED] p-4 hover:border-[#2D6A4F] hover:shadow-md transition-all group">
+            <div class="font-[family-name:var(--font-sora)] text-xl font-bold text-[#2D6A4F]">{postcode}</div>
+            <div class="text-[#6B7280] text-xs mt-1 truncate">{rg.state} · NZ</div>
+          </a>
+        ))}
+      </div>
+
+      <section class="mt-12 max-w-3xl mx-auto">
+        <h2 class="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#0B2545] mb-6 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-3">
+          {faqs.map((f) => (
+            <div class="bg-white rounded-xl border border-[#E2E6ED] p-5">
+              <h3 class="font-semibold text-[#1A1A2E] mb-2">{f.question}</h3>
+              <p class="text-[#6B7280] text-sm">{f.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

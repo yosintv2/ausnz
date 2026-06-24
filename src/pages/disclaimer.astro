@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<BaseLayout title="Disclaimer" description="Disclaimer for ANZPostcode.com." canonical="https://anzpostcode.com/disclaimer">
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "Disclaimer" }]} />
+  <main>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="font-[family-name:var(--font-sora)] text-3xl sm:text-4xl font-bold text-[#0B2545] mb-6">Disclaimer</h1>
+      <div class="space-y-6 text-[#6B7280] text-sm">
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">General Information</h2>
+          <p>The postcode, suburb, and locality information provided on ANZPostcode.com is for general reference purposes only. While we make every effort to ensure accuracy, the data may contain errors or omissions.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">No Official Affiliation</h2>
+          <p>ANZPostcode.com is not affiliated with, endorsed by, or connected to Australia Post, New Zealand Post, or any government agency. This is an independent reference website.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Not for Official Use</h2>
+          <p>You should not rely solely on this information for official purposes such as mail delivery, legal address verification, or emergency services. Always check with the relevant postal authority for official postcode information.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Map Data</h2>
+          <p>Map data is provided by OpenStreetMap contributors under the Open Database License. Map tile coordinates are approximate and should not be used for precise navigation.</p>
+        </section>
+        <div class="bg-[#F4F6F9] border border-[#E2E6ED] rounded-xl p-4">
+          <p class="font-medium text-[#1A1A2E] mb-1">Summary</p>
+          <p>This website provides postcode information for general reference only. For official delivery or address verification, please check the relevant postal authority.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

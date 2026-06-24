@@ -1,0 +1,44 @@
+---
+import { ChevronRight, Home } from "lucide-react";
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const all = [{ label: "Home", href: "/" }, ...items];
+---
+
+<nav aria-label="Breadcrumb" class="bg-white border-b border-[#E2E6ED]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ol class="flex items-center gap-1 py-3 text-sm overflow-x-auto">
+      {all.map((item, i) => (
+        <li class="flex items-center gap-1 whitespace-nowrap">
+          {i > 0 && <ChevronRight class="w-3.5 h-3.5 text-[#6B7280] flex-shrink-0" />}
+          {i === 0 && <Home class="w-3.5 h-3.5 text-[#6B7280] flex-shrink-0 mr-0.5" />}
+          {item.href && i < all.length - 1 ? (
+            <a href={item.href} class="text-[#6B7280] hover:text-[#0B2545] transition-colors">{item.label}</a>
+          ) : (
+            <span class="text-[#1A1A2E] font-medium">{item.label}</span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: all.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.label,
+      item: item.href ? `https://anzpostcode.com${item.href}` : undefined,
+    })),
+  })} />
+</nav>

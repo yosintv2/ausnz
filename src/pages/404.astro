@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Page Not Found">
+  <Header slot="header" />
+  <main class="flex-1 flex items-center justify-center">
+    <div class="text-center py-24 px-4">
+      <h1 class="font-[family-name:var(--font-sora)] text-8xl font-bold text-[#0B2545] mb-4">404</h1>
+      <p class="text-[#6B7280] text-lg mb-8">Page not found. Try searching for a postcode or suburb.</p>
+      <a href="/" class="inline-flex px-6 py-3 bg-[#E8472A] text-white font-semibold rounded-xl hover:bg-[#d43d22] transition-colors">Go Home</a>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

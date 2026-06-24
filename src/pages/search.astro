@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SearchBox from "../components/SearchBox";
+import SearchResults from "../components/SearchResults";
+---
+
+<BaseLayout title="Search Postcodes & Suburbs" description="Search Australian and New Zealand postcodes, suburbs, and localities." canonical="https://anzpostcode.com/search">
+  <Header slot="header" />
+  <main>
+    <section class="bg-gradient-to-br from-[#0B2545] to-[#112d5e] text-white py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-[family-name:var(--font-sora)] text-3xl font-bold text-center mb-6">Search Postcodes &amp; Suburbs</h1>
+        <SearchBox client:load size="lg" placeholder="Search postcode, suburb, or locality…" />
+      </div>
+    </section>
+
+    <div id="search-results" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SearchResults client:load />
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  // The SearchResults component handles everything client-side
+</script>

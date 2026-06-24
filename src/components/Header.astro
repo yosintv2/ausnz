@@ -1,0 +1,49 @@
+---
+import { MapPin, Search } from "lucide-react";
+---
+
+<header class="sticky top-0 z-50 bg-[#0B2545] shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-[#E8472A] rounded-lg flex items-center justify-center flex-shrink-0">
+          <MapPin class="w-4 h-4 text-white" />
+        </div>
+        <span class="font-[family-name:var(--font-sora)] text-white font-bold text-lg leading-tight">
+          ANZ<span class="text-[#E8472A]">Postcode</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="/au" class="text-white/80 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+          🇦🇺 Australia
+        </a>
+        <a href="/nz" class="text-white/80 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+          🇳🇿 New Zealand
+        </a>
+        <a href="/search" class="text-white/80 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1">
+          <Search class="w-3.5 h-3.5" />
+          Search
+        </a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3">
+        <a href="/au/postcodes" class="text-white/70 hover:text-white text-sm transition-colors">Browse AU</a>
+        <a href="/nz/postcodes" class="text-white/70 hover:text-white text-sm transition-colors">Browse NZ</a>
+      </div>
+
+      <details class="md:hidden group relative">
+        <summary class="md:hidden text-white/80 hover:text-white p-2 rounded-md cursor-pointer list-none" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </summary>
+        <div class="absolute right-0 top-full mt-2 w-56 bg-[#0B2545] border border-white/10 rounded-xl shadow-xl overflow-hidden">
+          <a href="/au" class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 text-sm font-medium border-b border-white/10">🇦🇺 Australia</a>
+          <a href="/nz" class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 text-sm font-medium border-b border-white/10">🇳🇿 New Zealand</a>
+          <a href="/search" class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 text-sm font-medium border-b border-white/10">🔍 Search</a>
+          <a href="/au/postcodes" class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 text-sm font-medium border-b border-white/10">Browse AU Postcodes</a>
+          <a href="/nz/postcodes" class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 text-sm font-medium">Browse NZ Postcodes</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<BaseLayout title="Privacy Policy" description="Privacy policy for ANZPostcode.com." canonical="https://anzpostcode.com/privacy-policy">
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
+  <main>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="font-[family-name:var(--font-sora)] text-3xl sm:text-4xl font-bold text-[#0B2545] mb-6">Privacy Policy</h1>
+      <div class="space-y-6 text-[#6B7280] text-sm">
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Information We Collect</h2>
+          <p>ANZPostcode.com does not collect personal information. We do not use cookies, analytics trackers, or store any user data. Our site is fully static and does not process or retain any user input on servers.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Search Queries</h2>
+          <p>Search queries are processed locally in your browser using Fuse.js. No search data is sent to any server. Your searches remain private and are not logged or stored.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Third-Party Services</h2>
+          <p>Our site uses OpenStreetMap tiles for map display. When you view a map, your browser may request tile images from OpenStreetMap servers. This may result in your IP address being visible to OpenStreetMap. Please refer to the OpenStreetMap privacy policy for more information.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Cookies</h2>
+          <p>This website does not use cookies. We do not track or profile users in any way.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Data Security</h2>
+          <p>As a fully static site hosted on Cloudflare Pages, your connection to this site is encrypted via HTTPS. No user data is stored or processed on our servers.</p>
+        </section>
+        <section>
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-2">Changes to This Policy</h2>
+          <p>We may update this privacy policy from time to time. Any changes will be posted on this page.</p>
+        </section>
+        <p class="text-xs mt-8">Last updated: June 2026</p>
+      </div>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { getNZLocalityGroups } from "../../lib/data";
+import { titleCase } from "../../lib/utils";
+
+const nzMap = getNZLocalityGroups();
+const all = Array.from(nzMap.values()).sort((a, b) => a.locality.localeCompare(b.locality));
+const alphaMap = new Map<string, typeof all>();
+for (const item of all) {
+  const first = item.locality.charAt(0).toUpperCase();
+  if (!alphaMap.has(first)) alphaMap.set(first, []);
+  alphaMap.get(first)!.push(item);
+}
+const letters = Array.from(alphaMap.keys()).sort();
+---
+
+<BaseLayout
+  title="A–Z Index of New Zealand Localities"
+  description="Alphabetical index of all New Zealand localities. Browse by letter to find any NZ locality."
+  canonical="https://anzpostcode.com/nz/a-z"
+>
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "New Zealand", href: "/nz" }, { label: "A–Z Index" }]} />
+  <main>
+    <section class="bg-gradient-to-br from-[#1B4332] to-[#2D6A4F] text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-[family-name:var(--font-sora)] text-4xl sm:text-5xl font-bold mb-3">A–Z Index of New Zealand Localities</h1>
+        <p class="text-white/70 text-lg">{all.length} localities</p>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-wrap gap-2 mb-8">
+        {letters.map((l) => (
+          <a key={l} href={`#letter-${l}`}
+            class="w-10 h-10 flex items-center justify-center bg-white border border-[#E2E6ED] rounded-lg text-sm font-bold text-[#0B2545] hover:border-[#2D6A4F] hover:text-[#2D6A4F] transition-colors">{l}</a>
+        ))}
+      </div>
+
+      {letters.map((letter) => {
+        const items = alphaMap.get(letter)!.slice(0, 50);
+        return (
+          <section id={`letter-${letter}`} class="mb-8">
+            <h2 class="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#0B2545] mb-4 border-b border-[#E2E6ED] pb-2">{letter}</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+              {items.map((item) => (
+                <a key={item.slug} href={`/nz/locality/${item.slug}`}
+                  class="text-sm text-[#1A1A2E] hover:text-[#2D6A4F] transition-colors">{titleCase(item.locality)}</a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

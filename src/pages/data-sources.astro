@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<BaseLayout title="Data Sources" description="Learn about the data sources used for ANZPostcode.com." canonical="https://anzpostcode.com/data-sources">
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "Data Sources" }]} />
+  <main>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="font-[family-name:var(--font-sora)] text-3xl sm:text-4xl font-bold text-[#0B2545] mb-6">Data Sources</h1>
+      <div class="space-y-6">
+        <section class="bg-white rounded-xl border border-[#E2E6ED] p-6">
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-3">Australian Postcodes</h2>
+          <p class="text-[#6B7280] text-sm mb-2">Our Australian postcode data includes over 18,000 records covering all states and territories. The dataset includes postcodes, suburbs, states, coordinates, and administrative region information.</p>
+          <p class="text-[#6B7280] text-xs">Source: Community-contributed open data, updated regularly.</p>
+        </section>
+
+        <section class="bg-white rounded-xl border border-[#E2E6ED] p-6">
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-3">New Zealand Postcodes</h2>
+          <p class="text-[#6B7280] text-sm mb-2">Our New Zealand postcode data includes postcodes, localities, regions, and coordinates across all 16 regions of New Zealand.</p>
+          <p class="text-[#6B7280] text-xs">Source: Community-contributed open data, updated regularly.</p>
+        </section>
+
+        <section class="bg-white rounded-xl border border-[#E2E6ED] p-6">
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-3">OpenStreetMap</h2>
+          <p class="text-[#6B7280] text-sm mb-2">Interactive maps on this site are powered by OpenStreetMap. Map tiles are provided under the Open Database License by the OpenStreetMap Foundation.</p>
+          <p class="text-[#6B7280] text-xs">© OpenStreetMap contributors. <a href="https://www.openstreetmap.org/copyright" class="text-[#E8472A] hover:underline" target="_blank" rel="noopener noreferrer">Learn more</a></p>
+        </section>
+
+        <section class="bg-white rounded-xl border border-[#E2E6ED] p-6">
+          <h2 class="font-[family-name:var(--font-sora)] text-lg font-bold text-[#0B2545] mb-3">Search Technology</h2>
+          <p class="text-[#6B7280] text-sm">Client-side search functionality is powered by Fuse.js, a lightweight fuzzy-search library. All search processing happens locally in your browser — no data is sent to any server.</p>
+        </section>
+
+        <div class="bg-[#F4F6F9] border border-[#E2E6ED] rounded-xl p-4 text-sm text-[#6B7280]">
+          <p>If you have questions about our data sources or would like to report an error, please <a href="/contact" class="text-[#E8472A] hover:underline">contact us</a>.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

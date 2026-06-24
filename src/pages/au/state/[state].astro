@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import SearchBox from "../../../components/SearchBox";
+import { getAUStateGroups, getAUPostcodeGroups } from "../../../lib/data";
+import { stateLabel, titleCase } from "../../../lib/utils";
+
+export async function getStaticPaths() {
+  const groups = getAUStateGroups();
+  return groups.map((s) => ({
+    params: { state: s.slug },
+  }));
+}
+
+const { state: stateSlug } = Astro.params;
+const groups = getAUStateGroups();
+const sg = groups.find((s) => s.slug === stateSlug);
+if (!sg) return Astro.redirect("/404");
+
+const stName = stateLabel(sg.state);
+const auMap = getAUPostcodeGroups();
+const statePostcodes = sg.postcodes.map((p) => auMap.get(p)).filter(Boolean);
+const faqs = [
+  { question: `What postcodes are in ${stName}?`, answer: `${stName} has ${sg.postcodes.length.toLocaleString()} postcodes covering ${sg.localityCount.toLocaleString()} suburbs.` },
+  { question: `What are the main suburbs in ${stName}?`, answer: `${stName} includes major suburbs and localities across ${sg.postcodes.length.toLocaleString()} postcode areas.` },
+  { question: `How many postcodes does ${sg.state} have?`, answer: `${sg.state} (${stName}) has ${sg.postcodes.length.toLocaleString()} postcodes.` },
+  { question: "Is this postcode information official?", answer: "This information is provided for general reference only. For official postal purposes, please check Australia Post." },
+];
+---
+
+<BaseLayout
+  title={`${sg.state} Postcodes – ${stName}`}
+  description={`Browse all ${sg.postcodes.length.toLocaleString()} postcodes in ${stName} (${sg.state}), Australia. Find suburbs, maps, and nearby postcodes.`}
+  canonical={`https://anzpostcode.com/au/state/${stateSlug}`}
+>
+  <Header slot="header" />
+  <Breadcrumbs items={[
+    { label: "Australia", href: "/au" },
+    { label: stName },
+  ]} />
+  <main>
+    <section class="bg-gradient-to-br from-[#0B2545] to-[#112d5e] text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-[family-name:var(--font-sora)] text-4xl sm:text-5xl font-bold mb-3">{stName} Postcodes</h1>
+        <p class="text-white/70 text-lg">{sg.postcodes.length.toLocaleString()} postcodes · {sg.localityCount.toLocaleString()} suburbs</p>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="mb-6 max-w-md">
+        <SearchBox client:load size="sm" placeholder={`Search ${sg.state} postcodes…`} />
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {sg.postcodes.map((postcode) => (
+          <a key={postcode} href={`/au/postcode/${postcode}`}
+            class="bg-white rounded-xl border border-[#E2E6ED] p-4 hover:border-[#E8472A] hover:shadow-md transition-all group">
+            <div class="font-[family-name:var(--font-sora)] text-xl font-bold text-[#E8472A]">{postcode}</div>
+            <div class="text-[#6B7280] text-xs mt-1 truncate">{sg.state} · AU</div>
+          </a>
+        ))}
+      </div>
+
+      <section class="mt-12 max-w-3xl mx-auto">
+        <h2 class="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#0B2545] mb-6 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-3">
+          {faqs.map((f) => (
+            <div class="bg-white rounded-xl border border-[#E2E6ED] p-5">
+              <h3 class="font-semibold text-[#1A1A2E] mb-2">{f.question}</h3>
+              <p class="text-[#6B7280] text-sm">{f.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

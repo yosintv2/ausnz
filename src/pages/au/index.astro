@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { getAUStateGroups, getAUPostcodeGroups, getAULocalityGroups } from "../../lib/data";
+import { stateLabel, titleCase } from "../../lib/utils";
+
+const auStates = getAUStateGroups();
+const totalPostcodes = getAUPostcodeGroups().size;
+const totalSuburbs = getAULocalityGroups().size;
+const stateLabels: Record<string, string> = { NSW: "New South Wales", VIC: "Victoria", QLD: "Queensland", SA: "South Australia", WA: "Western Australia", TAS: "Tasmania", NT: "Northern Territory", ACT: "Australian Capital Territory" };
+const stateFlags: Record<string, string> = { NSW: "🏙️", VIC: "🎭", QLD: "☀️", SA: "🍷", WA: "🏜️", TAS: "🌿", NT: "🌵", ACT: "🏛️" };
+---
+
+<BaseLayout
+  title="Australia Postcodes"
+  description="Browse all Australian postcodes, suburbs, and states. Search by postcode, suburb, or state across all Australian territories."
+  canonical="https://anzpostcode.com/au"
+>
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "Australia" }]} />
+  <main>
+    <section class="bg-gradient-to-br from-[#0B2545] to-[#112d5e] text-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-[#E8472A] text-white text-xs font-semibold px-3 py-1 rounded-full">🇦🇺 Australia</span>
+        </div>
+        <h1 class="font-[family-name:var(--font-sora)] text-4xl sm:text-5xl font-bold mb-4">Australia Postcodes &amp; Suburbs</h1>
+        <p class="text-white/70 text-lg max-w-2xl">Explore postcodes, suburbs, and localities across {totalPostcodes.toLocaleString()} postcode areas in all Australian states and territories.</p>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {[
+          { label: "Total Postcodes", value: totalPostcodes.toLocaleString() },
+          { label: "Total Suburbs", value: totalSuburbs.toLocaleString() },
+          { label: "States & Territories", value: "8" },
+          { label: "Data Coverage", value: "99%" },
+        ].map((stat) => (
+          <div class="bg-white rounded-xl border border-[#E2E6ED] p-5 text-center">
+            <div class="font-[family-name:var(--font-sora)] font-bold text-2xl text-[#0B2545]">{stat.value}</div>
+            <div class="text-[#6B7280] text-sm mt-1">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#0B2545] mb-6">Browse by State</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {auStates.map((s) => (
+          <a key={s.state} href={`/au/state/${s.slug}`}
+            class="group bg-white rounded-xl border border-[#E2E6ED] p-6 hover:border-[#E8472A] hover:shadow-md transition-all">
+            <div class="text-3xl mb-3">{stateFlags[s.state] ?? "📍"}</div>
+            <h3 class="font-[family-name:var(--font-sora)] font-bold text-lg text-[#0B2545] group-hover:text-[#E8472A] transition-colors">{s.state}</h3>
+            <p class="text-[#6B7280] text-sm">{stateLabels[s.state] ?? s.state}</p>
+            <div class="flex gap-3 mt-3 text-xs text-[#E8472A] font-medium">
+              <span>{s.postcodes.length.toLocaleString()} postcodes</span>
+              <span>·</span>
+              <span>{s.localityCount.toLocaleString()} suburbs</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="bg-[#0B2545] rounded-2xl p-8 text-white">
+        <h2 class="font-[family-name:var(--font-sora)] text-xl font-bold mb-4">Quick Browse</h2>
+        <div class="flex flex-wrap gap-3">
+          <a href="/au/postcodes" class="px-4 py-2 bg-[#E8472A] hover:bg-[#d43d22] rounded-lg text-sm font-medium transition-colors">All Postcodes</a>
+          <a href="/au/suburbs" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">All Suburbs</a>
+          <a href="/au/a-z" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">A–Z Index</a>
+          <a href="/search" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">Search</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

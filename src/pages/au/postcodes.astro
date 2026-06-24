@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import SearchBox from "../../components/SearchBox";
+import { getAUStateGroups, getAUPostcodeGroups } from "../../lib/data";
+import { stateLabel } from "../../lib/utils";
+
+const auStates = getAUStateGroups();
+const auMap = getAUPostcodeGroups();
+const AU_STATE_ORDER = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"];
+const sortedStates = AU_STATE_ORDER.map((code) => auStates.find((s) => s.state === code)).filter(Boolean);
+---
+
+<BaseLayout
+  title="All Australian Postcodes"
+  description="Browse all Australian postcodes by state and territory. Complete list of postcodes across NSW, VIC, QLD, SA, WA, TAS, NT, and ACT."
+  canonical="https://anzpostcode.com/au/postcodes"
+>
+  <Header slot="header" />
+  <Breadcrumbs items={[{ label: "Australia", href: "/au" }, { label: "All Postcodes" }]} />
+  <main>
+    <section class="bg-gradient-to-br from-[#0B2545] to-[#112d5e] text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-[family-name:var(--font-sora)] text-4xl sm:text-5xl font-bold mb-3">All Australian Postcodes</h1>
+        <p class="text-white/70 text-lg">{auMap.size.toLocaleString()} postcodes across 8 states and territories</p>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="sticky top-16 z-40 bg-[#F4F6F9] pb-4 pt-2 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+        <div class="flex gap-2 overflow-x-auto pb-2">
+          {sortedStates.map((s) => (
+            <a key={s?.state} href={`#${s?.state.toLowerCase()}`}
+              class="flex-shrink-0 px-4 py-2 bg-white border border-[#E2E6ED] rounded-full text-xs font-medium text-[#0B2545] hover:border-[#E8472A] hover:text-[#E8472A] transition-colors">{s?.state}</a>
+          ))}
+        </div>
+      </div>
+
+      {sortedStates.map((sg) => {
+        if (!sg) return null;
+        const stName = stateLabel(sg.state);
+        return (
+          <section id={sg.state.toLowerCase()} class="mb-10">
+            <h2 class="font-[family-name:var(--font-sora)] text-xl font-bold text-[#0B2545] mb-1">{sg.state} – {stName}</h2>
+            <p class="text-[#6B7280] text-sm mb-4">{sg.postcodes.length.toLocaleString()} postcodes</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
+              {sg.postcodes.map((p) => (
+                <a key={p} href={`/au/postcode/${p}`}
+                  class="bg-white border border-[#E2E6ED] rounded-lg px-3 py-2 text-sm hover:border-[#E8472A] hover:text-[#E8472A] transition-colors">
+                  <span class="font-semibold">{p}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>
