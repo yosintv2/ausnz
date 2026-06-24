@@ -1,2 +1,3 @@
-# Cloudflare Pages redirects
-/*    /index.html   404
+# Cloudflare Pages redirects & rewrites
+/au/suburb/* /au/suburb/index.html 200
+/nz/locality/* /nz/locality/index.html 200

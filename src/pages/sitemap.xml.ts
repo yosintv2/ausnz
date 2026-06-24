@@ -19,19 +19,15 @@ export const GET: APIRoute = async () => {
   ];
 
   const auPostcodes = Array.from(getAUPostcodeGroups().keys());
-  const auSuburbs = Array.from(getAULocalityGroups().keys());
   const auStates = getAUStateGroups().map((s) => `/au/state/${s.slug}`);
   const nzPostcodes = Array.from(getNZPostcodeGroups().keys());
-  const nzLocalities = Array.from(getNZLocalityGroups().keys());
   const nzRegions = getNZRegionGroups().map((r) => `/nz/region/${r.slug}`);
 
   const allPaths = [
     ...staticPages,
     ...auPostcodes.map((p) => `/au/postcode/${p}`),
-    ...auSuburbs.map((s) => `/au/suburb/${s}`),
     ...auStates,
     ...nzPostcodes.map((p) => `/nz/postcode/${p}`),
-    ...nzLocalities.map((l) => `/nz/locality/${l}`),
     ...nzRegions,
   ];
 

@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import LocalityView from "../../../components/LocalityView";
+---
+
+<BaseLayout title="Locality" description="View New Zealand locality details.">
+  <Header slot="header" />
+  <main>
+    <LocalityView client:load />
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>

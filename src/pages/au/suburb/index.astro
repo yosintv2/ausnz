@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import SuburbView from "../../../components/SuburbView";
+---
+
+<BaseLayout title="Suburb" description="View Australian suburb details.">
+  <Header slot="header" />
+  <main>
+    <SuburbView client:load />
+  </main>
+  <Footer slot="footer" />
+</BaseLayout>
